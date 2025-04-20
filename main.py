@@ -58,7 +58,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif query.data == 'crypto_vip':
         text = (
-            "ابتدا با یکی از صرافی‌های زیر ثبت‌نام کن':
+            "ابتدا با یکی از صرافی‌های زیر ثبت‌نام کن":
 
 "
             "1️⃣ Toobit:
