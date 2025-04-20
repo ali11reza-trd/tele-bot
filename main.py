@@ -64,28 +64,51 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text("صرافی مورد نظر رو انتخاب کن:", reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif query.data == 'toobit':
-        await query.edit_message_text("""📌 ابتدا با این لینک در Toobit ثبت‌نام کن:
+        keyboard = [[InlineKeyboardButton("🔙 بازگشت", callback_data='crypto_vip')]]
+        await query.edit_message_text(
+            """📌 ابتدا با این لینک در Toobit ثبت‌نام کن:
 https://www.toobit.com/
 کد رفرال: giWAS2
 
-✅ پس از ثبت‌نام، لطفاً UID خود را ارسال کنید تا بررسی و افزودن به لیست VIP انجام شود.""")
+✅ پس از ثبت‌نام، لطفاً UID خود را ارسال کنید تا بررسی و افزودن به لیست VIP انجام شود.""",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
 
     elif query.data == 'lbank':
-        await query.edit_message_text("""📌 ابتدا با این لینک در LBank ثبت‌نام کن:
+        keyboard = [[InlineKeyboardButton("🔙 بازگشت", callback_data='crypto_vip')]]
+        await query.edit_message_text(
+            """📌 ابتدا با این لینک در LBank ثبت‌نام کن:
 https://www.lbank.com/
 کد رفرال: به‌زودی اضافه می‌شود...
 
-✅ پس از ثبت‌نام، لطفاً UID خود را ارسال کنید تا بررسی انجام شود.""")
+✅ پس از ثبت‌نام، لطفاً UID خود را ارسال کنید تا بررسی انجام شود.""",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
 
     elif query.data == 'crypto_free':
-        await query.edit_message_text("""🎁 برای دریافت سیگنال رایگان:
-ابتدا در صرافی زیر ثبت‌نام کن:
+        keyboard = [[InlineKeyboardButton("🔙 بازگشت", callback_data='crypto')]]
+        await query.edit_message_text(
+            """🎁 برای دریافت سیگنال رایگان:
+ابتدا در یکی از صرافی‌های زیر ثبت‌نام کن:
 
-🔗 https://www.toobit.com/
-کد رفرال: giWAS2
+🔗 Toobit: https://www.toobit.com/  (کد رفرال: giWAS2)
+🔗 LBank: https://www.lbank.com/
 
 سپس UID خود را ارسال کن. پس از تأیید، لینک عضویت برات فرستاده میشه.
-(به‌زودی بررسی UID از طریق API انجام خواهد شد.)""")
+(به‌زودی بررسی UID از طریق API انجام خواهد شد.)""",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+
+    elif query.data == 'forex_free':
+        keyboard = [[InlineKeyboardButton("🔙 بازگشت", callback_data='forex')]]
+        await query.edit_message_text(
+            "به‌زودی اطلاعات عضویت رایگان فارکس قرار می‌گیرد.",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+
+    elif query.data == 'forex_vip':
+        keyboard = [[InlineKeyboardButton("🔙 بازگشت", callback_data='forex')]]
+        await query.edit_message_text("به‌زودی اطلاعات عضویت VIP فارکس اضافه خواهد شد.", reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif query.data == 'start':
         await start(update, context)
