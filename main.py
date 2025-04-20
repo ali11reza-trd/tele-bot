@@ -27,7 +27,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = [
             [InlineKeyboardButton("📷 اینستاگرام", url='https://www.instagram.com/moamir_tradegroup')],
             [InlineKeyboardButton("🎮 دیسکورد", url='https://discord.gg/ZZBhyBhf')],
-            [InlineKeyboardButton("🛠 پشتیبانی", url='https://t.me/YOUR_SUPPORT')],
             [InlineKeyboardButton("🔙 بازگشت", callback_data='start')]
         ]
         await query.edit_message_text("📩 راه‌های ارتباط با ما:", reply_markup=InlineKeyboardMarkup(keyboard))
@@ -50,25 +49,43 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif query.data == 'crypto':
         keyboard = [
-            [InlineKeyboardButton("🎁 عضویت رایگان کریپتو", url="https://t.me/+Ab2sDDf9WCQ4NWFk")],
+            [InlineKeyboardButton("🎁 عضویت رایگان کریپتو", callback_data='crypto_free')],
             [InlineKeyboardButton("💎 عضویت VIP کریپتو", callback_data='crypto_vip')],
             [InlineKeyboardButton("🔙 بازگشت", callback_data='signals')]
         ]
         await query.edit_message_text("📊 انتخاب نوع عضویت در سیگنال کریپتو:", reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif query.data == 'crypto_vip':
-        text = (
-            """ابتدا با یکی از صرافی‌های زیر ثبت‌نام کن:
+        keyboard = [
+            [InlineKeyboardButton("ثبت‌نام در Toobit", callback_data='toobit')],
+            [InlineKeyboardButton("ثبت‌نام در LBank", callback_data='lbank')],
+            [InlineKeyboardButton("🔙 بازگشت", callback_data='crypto')]
+        ]
+        await query.edit_message_text("صرافی مورد نظر رو انتخاب کن:", reply_markup=InlineKeyboardMarkup(keyboard))
 
+    elif query.data == 'toobit':
+        await query.edit_message_text("""📌 ابتدا با این لینک در Toobit ثبت‌نام کن:
+https://www.toobit.com/
+کد رفرال: giWAS2
 
-            1️⃣ Toobit:
-            🔗 لینک ثبت‌نام: https://www.toobit.com/
-           💬 کد رفرال: giWAS2
+✅ پس از ثبت‌نام، لطفاً UID خود را ارسال کنید تا بررسی و افزودن به لیست VIP انجام شود.""")
 
+    elif query.data == 'lbank':
+        await query.edit_message_text("""📌 ابتدا با این لینک در LBank ثبت‌نام کن:
+https://www.lbank.com/
+کد رفرال: به‌زودی اضافه می‌شود...
 
-            ⏳ پس از ثبت‌نام، UID خود را ارسال کنید تا عضویت VIP شما بررسی شود."""
-        )
-        await query.edit_message_text(text)
+✅ پس از ثبت‌نام، لطفاً UID خود را ارسال کنید تا بررسی انجام شود.""")
+
+    elif query.data == 'crypto_free':
+        await query.edit_message_text("""🎁 برای دریافت سیگنال رایگان:
+ابتدا در صرافی زیر ثبت‌نام کن:
+
+🔗 https://www.toobit.com/
+کد رفرال: giWAS2
+
+سپس UID خود را ارسال کن. پس از تأیید، لینک عضویت برات فرستاده میشه.
+(به‌زودی بررسی UID از طریق API انجام خواهد شد.)""")
 
     elif query.data == 'start':
         await start(update, context)
